@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sphiwe ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff5f9e, #ff9a9e);
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  padding: 30px 20px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.hidden { display: none; }
+
+h1 {
+  font-size: 2em;
+  animation: float 3s infinite;
+}
+
+p { font-size: 1.1em; }
+
+img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin: 15px 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+button {
+  padding: 14px 26px;
+  border-radius: 30px;
+  border: none;
+  background: #ff2e63;
+  color: white;
+  font-size: 1.05em;
+  margin: 10px;
+}
+
+.heart {
+  position: absolute;
+  bottom: -20px;
+  animation: rise 6s linear infinite;
+}
+
+@keyframes rise {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="raindance.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="container" id="page1">
+  <h1>Hey Sphiwe Innocent Sono ❤️</h1>
+  <p>I made something special just for you…</p>
+  <button onclick="nextPage('page1','page2')">Tap me 💕</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="container hidden" id="page2">
+  <img src="her.jpg">
+  <p>You’re cute.</p>
+  <p>You’re rare.</p>
+  <p>And you mean more to me than you know 😌</p>
+  <button onclick="nextPage('page2','page3')">Continue 💖</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="container hidden" id="page3">
+  <img src="us.jpg">
+  <h1>Countdown to Valentine’s 💘</h1>
+  <p id="countdown"></p>
+  <button onclick="nextPage('page3','page4')">One more thing 😏</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="container hidden" id="page4">
+  <h1>So… 💕</h1>
+  <h1>Will you be my Valentine? 💘</h1>
+  <button onclick="yes()">YES 😍</button>
+  <button onclick="no(this)">No 🙄</button>
+</div>
+
+<script>
+document.getElementById("music").volume = 0.8;
+
+function nextPage(hide, show) {
+  document.getElementById(hide).classList.add("hidden");
+  document.getElementById(show).classList.remove("hidden");
+  document.getElementById("music").play();
+  hearts();
+}
+
+function yes() {
+  window.location.href =
+  "https://wa.me/?text=YES%20😍%20I%20will%20be%20your%20Valentine%20❤️";
+}
+
+function no(btn) {
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * 80 + "vw";
+  btn.style.top = Math.random() * 80 + "vh";
+}
+
+function hearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (15 + Math.random() * 30) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+  }, 300);
+}
+
+// COUNTDOWN
+const target = new Date("February 14, 2026 00:00:00").getTime();
+setInterval(() => {
+  const now = new Date().getTime();
+  const d = target - now;
+  const days = Math.floor(d / (1000 * 60 * 60 * 24));
+  document.getElementById("countdown").innerText =
+    days + " days left 💕";
+}, 1000);
+</script>
+
+</body>
+</html>
